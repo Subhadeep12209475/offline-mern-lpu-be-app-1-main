@@ -4,39 +4,37 @@ const {Schema ,model} = mongoose;
 const userSchema= new Schema(
   {
     description: String,
-        Name: {
+        name: {
             type: String,
             trim: true,
         },
-        Email : {
+        email : {
           type: String,
             required: true,
             unique: true,
             trim: true,
         },
-        PhoneNumber :{
+        phoneNumber :{
           type : Number,
-          required: true,
             unique: true,
             trim: true,
         },
-        Password :{
+        password :{
           type: String,
             required: true,
             unique: true,
             trim: true,
         },
-        Role:{
+        role:{
           type: String,
           enum : ["user","admin","super-admin"]
         },
-        Gender:{
+        gender:{
           type: String,
           enum: ["Male","Female"]
         },
-        Address :{
+        address :{
           type: String,
-            required: true,
             unique: true,
             trim: true,
         }
@@ -50,8 +48,8 @@ const userSchema= new Schema(
 
 userSchema.pre("save",async function(next){
   if(this.isModified("password")){
-    this.Password=
-    await bcrypt.hash(this.Password,12);
+    this.password=
+    await bcrypt.hash(this.password,12);
   }
   next();
 })

@@ -1,4 +1,4 @@
-const {userModel} = require("../../../models/user_schema");
+const {UserModel} = require("../../../models/user_schema");
 const userRegistrationController=async (req,res)=>{
   const data = req.body;
   if(!data.email || !data.password){
@@ -9,7 +9,7 @@ const userRegistrationController=async (req,res)=>{
     })
     return;
   }
-  const newUser = await userModel.create(data);
+  const newUser = await UserModel.create(data);
   const {password,...safeData}= newUser._doc;
   console.log("-->",safeData);
   // console.log("=>",newUser);
