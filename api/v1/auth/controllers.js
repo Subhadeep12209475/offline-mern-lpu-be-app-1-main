@@ -10,15 +10,17 @@ const userRegistrationController=async (req,res)=>{
     return;
   }
   const newUser = await userModel.create(data);
-  console.log("=>",newUser);
-  delete newUser.password;
-  console.log("--->",newUser);
+  const {password,...safeData}= newUser._doc;
+  console.log("-->",safeData);
+  // console.log("=>",newUser);
+  // delete newUser.password;
+  // console.log("--->",newUser);
 
   res.status(201).json({
     isSuccess :true,
     message :"User created",
     data :{
-      user:newUser,
+      user:safeData,
     }
   })
 }
