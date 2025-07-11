@@ -1,8 +1,9 @@
 const express = require("express");
+
+const {userRegistrationController} = require("./controllers")
 const authRouter = express.Router();
 
-authRouter.post("/signup",()=>{
-  console.log("Hello");
-});
+authRouter.post("/signup",userRegistrationController);
 
-export{authRouter};
+
+module.export={authRouter};
