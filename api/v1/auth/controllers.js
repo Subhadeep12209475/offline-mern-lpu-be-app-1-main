@@ -1,3 +1,4 @@
+const {userModel} = require("../../../models/user_schema");
 const userRegistrationController=async (req,res)=>{
   const data = req.body;
   if(!data.email || !data.password){
@@ -8,6 +9,18 @@ const userRegistrationController=async (req,res)=>{
     })
     return;
   }
+  const newUser = await userModel.create(data);
+  console.log("=>",newUser);
+  delete newUser.password;
+  console.log("--->",newUser);
+
+  res.status(201).json({
+    isSuccess :true,
+    message :"User created",
+    data :{
+      user:newUser,
+    }
+  })
 }
 
 module.exports={userRegistrationController};
